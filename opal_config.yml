@@ -1,0 +1,22 @@
+server:
+  listen: 0.0.0.0:7002
+  mode: server
+
+git:
+  repo_url: https://github.com/SuyodhanJ6/opa-opal.git
+  branch: main
+  polling_interval: 10
+
+opa:
+  url: http://opa:8181
+  policy_path: /v1/policies/main
+
+datasources:
+  - id: policy-data
+    type: git
+    repository: ${git.repo_url}
+    branch: ${git.branch}
+    base_directory: /
+    directories:
+      - policies
+    polling_interval: ${git.polling_interval}

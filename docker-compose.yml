@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  opa:
+    image: openpolicyagent/opa:latest
+    ports:
+      - "8181:8181"
+    volumes:
+      - ./policies:/policies
+    command:
+      - "run"
+      - "--server"
+      - "/policies/main.rego"
+
+  opal-server:
+    image: permitio/opal-server:latest
+    ports:
+      - "7002:7002"
+    environment:
+      - OPAL_SERVER_URL=http://opal-server:7002
+      - GIT_REPO_URL=https://github.com/SuyodhanJ6/opa-opal.git
+      - GIT_BRANCH=main
+      - POLLING_INTERVAL=10
+    volumes:
+      - ./opal_config.yml:/app/opal_config.yml
+
+  opal-client:
+    image: permitio/opal-client:latest
+    environment:
+      - OPAL_SERVER_URL=http://opal-server:7002
+      - OPA_POLICY_URL=http://opa:8181/v1/policies/main
+    depends_on:
+      - opa
+      - opal-server
