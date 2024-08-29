@@ -2,11 +2,12 @@ package ors
 
 default allow = false
 
-# Allow access to the microservice if user is admin or conditions are met
+# Allow access if the user is an admin
 allow {
   input.user.role == "admin"
 }
 
+# Allow access for regular users if specific conditions are met
 allow {
   input.user.role != "admin"
   valid_request
@@ -27,10 +28,10 @@ valid_coordinates {
   })
 }
 
-# Forward request to the microservice if allowed
+# This rule will be triggered if the request is allowed and will make an HTTP request to the microservice
 forward_request {
   allow
-  response = http.send({
+  response := http.send({
     "method": data.services.directions_foot_walking.method,
     "url": data.services.directions_foot_walking.url,
     "body": input.payload,
@@ -38,10 +39,12 @@ forward_request {
       "Content-Type": "application/json"
     }
   })
+  response_body := response.body
+  response_body  # Ensure this returns the response body from the microservice
 }
 
-# Denied response if not allowed
-response = {
+# Deny response if not allowed
+response := {
   "status": "denied",
   "message": "You are not authorized to access this resource."
 } {
