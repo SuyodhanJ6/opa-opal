@@ -1,8 +1,10 @@
 {
-    "microservices": {
-        "ors": {
-            "path": "/ors/v2/directions/foot-walking",
-            "url": "http://76.214.116.82:8080/ors/v2/directions/foot-walking"
-        }
+  "services": {
+    "directions_foot_walking": {
+      "method": "POST",
+      "url": "http://76.214.116.82:8080/ors/v2/directions/foot-walking",
+      "profile": "foot-walking",
+      "required_preference": "fastest"
     }
+  }
 }
