@@ -1,5 +1,8 @@
 {
     "microservices": {
-        "routing_service": "http://76.214.116.82:8080/ors/v2/directions/foot-walking"
+        "ors": {
+            "path": "/ors/v2/directions/foot-walking",
+            "url": "http://76.214.116.82:8080/ors/v2/directions/foot-walking"
+        }
     }
 }
