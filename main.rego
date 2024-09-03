@@ -13,7 +13,7 @@ allow {
   valid_request
 }
 
-# Check if the request has valid coordinates and matches service requirements
+# Check if the request has valid coordinates and matches service requirements 
 valid_request {
   valid_coordinates
   input.payload.profile == data.services.directions_foot_walking.profile
