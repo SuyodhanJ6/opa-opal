@@ -1,15 +1,24 @@
-package example.authz
+package ors
 
 default allow = false
 
+# Allow access if the user is an admin
 allow {
-    input.method == "GET"
-    input.path == "/data/resource"
-    input.token.payload.role == "admin"
+  input.user.role == "admin"
+  }
+
+# Allow access for regular users if specific conditions are met
+allow {
+  input.user.role != "admin"
+  valid_coordinates
+  input.payload.preference == "fastest"
 }
 
-allow {
-    input.method == "POST"
-    input.path == "/data/resource"
-    input.token.payload.role == "editor"
+valid_coordinates {
+  # Check that all coordinates satisfy the conditions
+  count(input.payload.coordinates) == count({ coord | 
+    coord = input.payload.coordinates[_] 
+    coord[0] > 78.0  # Longitude condition
+    coord[1] > 25.0  # Latitude condition
+  })
 }
