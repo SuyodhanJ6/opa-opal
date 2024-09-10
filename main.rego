@@ -20,7 +20,7 @@ valid_coordinates {
     coord |
     coord = input.payload.coordinates[_]
     # Check if longitude is greater than 78.0 and latitude is greater than 25.0
-    coord[0] > 65.0
+    coord[0] > 62.0
     coord[1] > 25.0
   })
 }
