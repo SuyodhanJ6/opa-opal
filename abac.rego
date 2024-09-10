@@ -15,6 +15,6 @@ allow {
 
 allow {
   input.user.role == "user"
-  input.payload.resource == "resource2"
+  input.payload.resource == "resource3"
   input.payload.action == "write"
 }
