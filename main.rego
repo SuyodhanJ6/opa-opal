@@ -1,5 +1,4 @@
-package ors.main
-
+package ors
 default allow = false
 
 # Allow access if the user is an admin
