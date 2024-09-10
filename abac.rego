@@ -2,11 +2,12 @@ package ors
 
 default allow = false
 
-# Allow access based on attributes
+# Allow access for admin users
 allow {
   input.user.role == "admin"
 }
 
+# Allow access for regular users with specific conditions
 allow {
   input.user.role == "user"
   input.payload.resource == "resource1"
