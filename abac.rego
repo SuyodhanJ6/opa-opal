@@ -1,4 +1,4 @@
-package ors
+package ors.abac
 
 default allow = false
 
@@ -7,7 +7,7 @@ allow {
   input.user.role == "admin"
 }
 
-# Allow access for regular users with specific conditions
+# Allow access for regular users with specific resources and actions
 allow {
   input.user.role == "user"
   input.payload.resource == "resource1"
