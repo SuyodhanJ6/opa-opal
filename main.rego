@@ -1,4 +1,4 @@
-package ors
+package app.main
 default allow = false
 
 # Allow access if the user is an admin
