@@ -26,3 +26,16 @@ valid_coordinates {
   })
 }
 
+
+
+allow {
+  input.user.role == "user"
+  input.payload.resource == "resource1"
+  input.payload.action == "read"
+}
+
+allow {
+  input.user.role == "user"
+  input.payload.resource == "resource3"
+  input.payload.action == "write"
+}
