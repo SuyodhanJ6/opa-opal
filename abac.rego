@@ -8,13 +8,13 @@ allow {
 }
 
 allow {
-  input.user.role == "user"
+  input.user.role == "editor"
   input.payload.resource == "resource1"
   input.payload.action == "read"
 }
 
 allow {
-  input.user.role == "user"
+  input.user.role == "editor"
   input.payload.resource == "resource2"
   input.payload.action == "write"
 }
