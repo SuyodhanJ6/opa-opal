@@ -1,4 +1,5 @@
-package ors.main
+package ors
+
 default allow = false
 
 # Allow access if the user is an admin
@@ -6,7 +7,7 @@ allow {
   input.user.role == "admin"
 }
 
-# Allow access for regular users if specific conditions are met
+# Allow access for regular users based on specific conditions
 allow {
   input.user.role != "admin"
   valid_coordinates
@@ -19,8 +20,21 @@ valid_coordinates {
   count(input.payload.coordinates) == count({
     coord |
     coord = input.payload.coordinates[_]
-    # Check if longitude is greater than 78.0 and latitude is greater than 25.0
-    coord[0] > 62.0
+    # Check if longitude is greater than 65.0 and latitude is greater than 25.0
+    coord[0] > 65.0
     coord[1] > 25.0
   })
+}
+
+# Allow access for regular users with specific resources and actions
+allow {
+  input.user.role == "user"
+  input.payload.resource == "resource1"
+  input.payload.action == "read"
+}
+
+allow {
+  input.user.role == "user"
+  input.payload.resource == "resource3"
+  input.payload.action == "write"
 }
