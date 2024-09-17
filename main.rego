@@ -18,7 +18,7 @@ valid_coordinates {
   # Check that all coordinates satisfy the conditions
   count(input.payload.coordinates) == count({ coord | 
     coord = input.payload.coordinates[_] 
-    coord[0] > 82.0  # Longitude condition
+    coord[0] > 83.0  # Longitude condition
     coord[1] > 25.0  # Latitude condition
   })
 }
